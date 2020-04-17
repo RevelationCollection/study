@@ -1,4 +1,4 @@
-package com.study.jdk.lock;
+package lock;
 
 public class WySemaphore {
 

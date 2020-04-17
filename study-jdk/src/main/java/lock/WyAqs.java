@@ -1,4 +1,4 @@
-package com.study.jdk.lock;
+package lock;
 
 import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
