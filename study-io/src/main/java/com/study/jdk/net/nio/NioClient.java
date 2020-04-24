@@ -20,7 +20,6 @@ public class NioClient {
         while (buffer.hasRemaining()){
             socketChannel.write(buffer);
         }
-        System.out.println("收到服务端响应");
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         while (socketChannel.isOpen() && socketChannel.read(byteBuffer)!=-1){
             //长连接情况下，需要手动盘面的数据尤美有读取结束。
@@ -28,8 +27,11 @@ public class NioClient {
                 break;
             }
         }
+        System.out.println("收到服务端响应");
         byteBuffer.flip();
-        byte[] content = byteBuffer.array();
+//        byte[] content = byteBuffer.array();
+        byte[] content = new byte[byteBuffer.limit()];
+        byteBuffer.get(content);
         System.out.println(new String(content));
         scanner.close();
         socketChannel.close();
