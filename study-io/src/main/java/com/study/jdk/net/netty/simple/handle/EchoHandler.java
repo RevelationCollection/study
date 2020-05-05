@@ -14,7 +14,8 @@ public class EchoHandler extends ChannelInboundHandlerAdapter {
         ByteBuf out = Unpooled.wrappedBuffer("server send msg".getBytes());
         ctx.write(out);
         ctx.writeAndFlush(byteBuf);
-//        ctx.pipeline().remove(EchoHandler.class);
+        System.out.println("对象数据:"+System.identityHashCode(this));
+        ctx.pipeline().remove(EchoHandler.class);
     }
 
     @Override

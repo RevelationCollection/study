@@ -9,14 +9,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class EchoServer {
 
     public static void main(String[] args) {
         //Configure the sever
         EventLoopGroup accetpGroup = new NioEventLoopGroup(1);
         //work threads
-        EventLoopGroup workGroup = new NioEventLoopGroup(3);
-
+        EventLoopGroup workGroup = new NioEventLoopGroup(1);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(accetpGroup,workGroup)
@@ -29,6 +31,10 @@ public class EchoServer {
                             //每个连接独立的初始加载
                             ChannelPipeline pipeline = socketChannel.pipeline();
                             pipeline.addLast(new EchoHandler());
+                            System.out.println("init pipeline数据:"+System.identityHashCode(pipeline)
+                                    +("，socketChannel:"+System.identityHashCode(socketChannel))
+                                    +("，this:"+System.identityHashCode(this))
+                                    +","+atomicInteger.incrementAndGet());
                         }
                     });
             ChannelFuture future = serverBootstrap.bind(8080).sync();
