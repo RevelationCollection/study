@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--scope="singleton"(默认就是单例方式) -->
+    <bean id="a" class="study.spring.core.circularbean.StudyA" scope="singleton">
+        <property name="studyB" ref="b"></property>
+    </bean>
+    <bean id="b" class="study.spring.core.circularbean.StudyB" scope="singleton">
+        <property name="studyC" ref="c"></property>
+    </bean>
+    <bean id="c" class="study.spring.core.circularbean.StudyC" scope="singleton">
+        <property name="studyA" ref="a"></property>
+    </bean>
+</beans>

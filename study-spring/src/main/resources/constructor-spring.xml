@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="a" class="study.spring.core.circularbean.StudyA">
+        <constructor-arg index="0" ref="b"/>
+    </bean>
+
+    <bean id ="b" class="study.spring.core.circularbean.StudyB">
+        <constructor-arg index="0" ref="c"/>
+    </bean>
+    <bean id ="c" class="study.spring.core.circularbean.StudyC">
+        <constructor-arg index="0" ref="a"/>
+    </bean>
+</beans>
