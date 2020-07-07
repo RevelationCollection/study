@@ -15,7 +15,7 @@ public class TestCenter {
     private  static ConcurrentHashMap<String, Channel> userInfos = new ConcurrentHashMap<>();
 
     // 保存信息
-    public static void saveConnection(String userId, Channel channel) {
+    public static void saveconnection(String userId, Channel channel) {
         userInfos.put(userId, channel);
     }
 
