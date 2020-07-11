@@ -16,6 +16,7 @@
         <module>study-io</module>
         <module>study-jdk</module>
         <module>study-spring</module>
+        <module>study-redis</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
