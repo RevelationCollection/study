@@ -12,7 +12,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -38,12 +37,12 @@ public class SingleRedisAppConfig {
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         return redisTemplate;
     }
-    @Bean
-    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory){
-        StringRedisTemplate redisTemplate = new StringRedisTemplate();
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
-        return redisTemplate;
-    }
+//    @Bean
+//    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory){
+//        StringRedisTemplate redisTemplate = new StringRedisTemplate();
+//        redisTemplate.setConnectionFactory(redisConnectionFactory);
+//        return redisTemplate;
+//    }
 
 
 

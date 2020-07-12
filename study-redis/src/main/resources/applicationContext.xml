@@ -21,8 +21,8 @@
         beans -->
     <context:component-scan base-package="com.study.redis"/>
 
-<!--    <bean id="stringRedisTemplate"-->
-<!--          class="org.springframework.data.redis.core.StringRedisTemplate"-->
-<!--          p:connection-factory-ref="redisConnectionFactory" >-->
-<!--    </bean>-->
+    <bean id="stringRedisTemplate"
+          class="org.springframework.data.redis.core.StringRedisTemplate"
+          p:connection-factory-ref="redisConnectionFactory" >
+    </bean>
 </beans> 
