@@ -47,7 +47,7 @@ public class CustomExampleService {
         // 通过其他的后台检查程序，防止缓存数据长期和数据库不同步
         synchronized (this) { // 同步~  1个线程拿到锁，其他线程等待。 数据库压力减小~
             //  高并发怼到数据库~~ 5000 get tony
-            // TODO 2、不存在则读取数据库或者其他地方的值
+            //  2、不存在则读取数据库或者其他地方的值
             user = new User(userId, "张三");
             System.out.println("从数据库中读取到值：" + user);
             // 3、 同步存储value到缓存。
