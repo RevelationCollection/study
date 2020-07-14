@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema
-        xmlns="http://study.personal/schema/woman"
+        xmlns="http://www.baidu.com/schema/woman"
         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:beans="http://www.springframework.org/schema/beans"
-        targetNamespace="http://study.personal/schema/woman"
+        targetNamespace="http://www.baidu.com/schema/woman"
         elementFormDefault="qualified"
         attributeFormDefault="unqualified">
     <xsd:import namespace="http://www.springframework.org/schema/beans" />
