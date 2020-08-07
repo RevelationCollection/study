@@ -1,0 +1,14 @@
+server:
+  port : 8082
+
+spring:
+  profiles:
+#    active : master_slave # 读写分离
+#    active: subdatabase #数据源分片
+#    active: subtable #数据源分片+表分片
+#    active: standard #数据源自定义分片策略+表分片
+    active: showflake #分布式式主键
+
+mybatis :
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.study

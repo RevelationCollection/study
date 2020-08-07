@@ -18,6 +18,7 @@
         <module>study-spring</module>
         <module>study-redis</module>
         <module>study-util</module>
+        <module>study-shardingjdbc</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
