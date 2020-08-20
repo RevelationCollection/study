@@ -11,6 +11,7 @@ public class ByteBufDemo {
         byteBuffer.put((byte) 1);
         byteBuffer.put((byte) 2);
         byteBuffer.put((byte) 3);
+        System.out.println("array:"+Arrays.toString(byteBuffer.array()));
         System.out.println(String.format("写入3字节后 容量：%s，位置：%s，限制：%s",byteBuffer.capacity()
                 ,byteBuffer.position(),byteBuffer.limit()));
         //开始读取数据
