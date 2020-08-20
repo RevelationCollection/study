@@ -42,6 +42,7 @@ public class NettyRpcServer extends BaseRpcServer {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new ChannelRequestHandler());
+                            pipeline.addLast(new ChannelOutHandler());
                         }
                     });
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
@@ -77,7 +78,7 @@ public class NettyRpcServer extends BaseRpcServer {
             byte[] req = new byte[byteBuf.readableBytes()];
             byteBuf.readBytes(req);
             byte[] response = requestHandler.handleRequest(req);
-            log.info("接收到消息处理成功，准备反写响应"+response);
+            log.info("处理成功，反写数据："+response);
             ByteBuf buffer = Unpooled.buffer(response.length);
             buffer.writeBytes(response);
             ctx.write(buffer);
@@ -93,6 +94,19 @@ public class NettyRpcServer extends BaseRpcServer {
             log.error("errpr",cause);
             ctx.close();
         }
+
+        @Override
+        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+            log.info("连接关闭：{}",ctx);
+            super.channelInactive(ctx);
+        }
+    }
+
+    private class ChannelOutHandler extends ChannelOutboundHandlerAdapter{
+
+        private Logger log = LoggerFactory.getLogger(getClass());
+
+
     }
 }
 

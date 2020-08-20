@@ -17,12 +17,15 @@ import java.util.concurrent.CountDownLatch;
 public class NettyNetClinet  implements NetClient{
     private Logger log = LoggerFactory.getLogger(getClass());
 
+
+
     @Override
     public byte[] sendRequest(byte[] data, ServiceInfo serviceInfo) throws Throwable{
         SendHandler sendHandler = new SendHandler(data);
         InetSocketAddress address = serviceInfo.getAddress();
         EventLoopGroup workGroup = new NioEventLoopGroup(5);
         Bootstrap bootstrap = new Bootstrap();
+        Channel channel = null;
         try {
             bootstrap.group(workGroup)
                     .channel(NioSocketChannel.class)
@@ -34,9 +37,12 @@ public class NettyNetClinet  implements NetClient{
                             pipeline.addLast(sendHandler);
                         }
                     });
-            bootstrap.connect(address).sync();
+            ChannelFuture channelFuture = bootstrap.connect(address);
+            channel = channelFuture.channel();
+            channelFuture.sync();
             return sendHandler.getRespMsg();
         } finally {
+            channel.close();
             workGroup.shutdownGracefully();
         }
     }
