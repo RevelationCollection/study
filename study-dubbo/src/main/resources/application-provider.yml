@@ -1,0 +1,10 @@
+dubbo:
+  application:
+    name: boot-provider
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.study.dubbo.provider
