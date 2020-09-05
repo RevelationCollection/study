@@ -1,0 +1,3 @@
+#auto configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.study.starter.custom.autoconfigure.GirlAutoconfigura

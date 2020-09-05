@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: test-boot
+  profiles:
+#    active: env
+    active: test
+
+custom:
+  apple:
+    name: 苹果
+    weight: 10
+    goods:
+      - aaa
+      - bbb
+      - ccc
+
+
+com:
+  study:
+    girl:
+      name: marry
+      hight: 180
+      year: 18
+      face: good

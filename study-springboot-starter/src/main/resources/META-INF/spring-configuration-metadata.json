@@ -1,0 +1,30 @@
+{
+  "groups": [
+    {
+      "name": "com.study.girl",
+      "type": "com.study.starter.custom.bean.Girl",
+      "sourceType": "com.study.starter.custom.autoconfigure.GirlProperties"
+    }
+  ],"properties": [
+  {
+    "name": "com.study.girl.name",
+    "type": "java.lang.String",
+    "sourceType": "com.study.starter.custom.autoconfigure.GirlProperties"
+  },
+  {
+    "name": "com.study.girl.hight",
+    "type": "java.lang.Integer",
+    "sourceType": "com.study.starter.custom.autoconfigure.GirlProperties"
+  },
+  {
+    "name": "com.study.girl.face",
+    "type": "java.lang.String",
+    "sourceType": "com.study.starter.custom.autoconfigure.GirlProperties"
+  },
+  {
+    "name": "com.study.girl.year",
+    "type": "java.lang.Integer",
+    "sourceType": "com.study.starter.custom.autoconfigure.GirlProperties"
+  }
+]
+}
