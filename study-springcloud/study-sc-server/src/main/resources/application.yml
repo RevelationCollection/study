@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: server2
+
+---
+server:
+  port: 8088
+
+spring:
+  application:
+    name: helloserver
+  profiles: server1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+    healthcheck:
+      enabled: true
+---
+server:
+  port: 8089
+
+spring:
+  application:
+    name: helloserver
+  profiles: server2
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+    healthcheck:
+      enabled: true

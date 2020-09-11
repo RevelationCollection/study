@@ -1,6 +1,7 @@
 package com.study.util.spi;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author wy
@@ -9,6 +10,7 @@ import java.io.*;
 public class TestMain {
 
     public static void main(String[] args) {
+        String str = "";
         doHandle("G:\\c.txt","G:\\copy_c.txt","CUSTOMER_NO");
     }
 
@@ -24,16 +26,16 @@ public class TestMain {
             }
             File newFile = new File(newFileName);
             System.out.println("文件开始处理中");
-            read = new InputStreamReader(new FileInputStream(file),"utf-8");//考虑到编码格式
-            output = new OutputStreamWriter(new FileOutputStream(newFile),"utf-8");//GB2312
+            read = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);//考虑到编码格式
+            output = new OutputStreamWriter(new FileOutputStream(newFile),StandardCharsets.UTF_8);//GB2312
 //            read = new InputStreamReader(new FileInputStream(file));
 //            output = new OutputStreamWriter(new FileOutputStream(newFile));
             bufferedReader = new BufferedReader(read);
-            StringBuffer buffer = new StringBuffer();
-            String lineTxt = "";
+            StringBuilder buffer = new StringBuilder();
+            String lineTxt;
             int i =1;
             while((lineTxt = bufferedReader.readLine()) != null){
-                if(lineTxt==null || lineTxt.length()==0 || "".equals(lineTxt)){
+                if(lineTxt.length()==0 || "".equals(lineTxt)){
                     continue;
                 }
                 if(isNumeric(lineTxt)){
@@ -51,7 +53,6 @@ public class TestMain {
             System.out.println("文件开始处理成功");
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }finally {
             if(read!=null) {
                 try {

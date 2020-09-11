@@ -1,0 +1,21 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: hystrix-client-server
+
+logging:
+  level:
+    org.springframework.cloud: debug
+    com.netflix: debug
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

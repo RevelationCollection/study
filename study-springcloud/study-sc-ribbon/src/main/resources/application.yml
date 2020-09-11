@@ -1,0 +1,38 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: ribbon-client-server
+  profiles:
+    active: cloud-ribbon
+
+logging:
+  level:
+    org.springframework.cloud: debug
+    com.netflix: debug
+
+
+---
+#ribbon直接负载请求，不通过eureka
+spring:
+  profiles: nocloud-ribbon
+
+eureka:
+  client:
+    enabled: false
+
+##1：定义一个serverList
+##格式:{serverId}:ribbon:listOfServers
+hello-server:
+  ribbon:
+    listOfServers: localhost:8088,127.0.0.1:8089
+
+---
+#ribbon cloud负载请求
+spring:
+  profiles: cloud-ribbon
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/

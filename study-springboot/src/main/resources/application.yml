@@ -3,7 +3,8 @@ spring:
     name: test-boot
   profiles:
 #    active: env
-    active: test
+#    active: test
+    active: endpoint
 
 custom:
   apple:

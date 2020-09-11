@@ -1,0 +1,100 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    org.springframework.cloud: debug
+    com.netflix: debug
+---
+spring:
+  application:
+    name:
+  profiles: dev
+
+server:
+  port: 8081
+
+
+eureka:
+  instance:
+    hostname: dev
+    instance-id: dev
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: true
+    peer-eureka-nodes-update-interval-ms: 10000
+
+---
+spring:
+  application:
+    name:
+  profiles: dev1
+
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: dev1
+    instance-id: dev1
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/,http://127.0.0.1:8083/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: true
+    peer-eureka-nodes-update-interval-ms: 10000
+
+---
+spring:
+  application:
+    name:
+  profiles: dev2
+
+server:
+  port: 8082
+
+eureka:
+  instance:
+    hostname: dev2
+    instance-id: dev2
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/,http://127.0.0.1:8083/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: true
+    peer-eureka-nodes-update-interval-ms: 10000
+
+---
+spring:
+  application:
+    name:
+  profiles: dev3
+
+server:
+  port: 8083
+
+eureka:
+  instance:
+    hostname: dev3
+    instance-id: dev3
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/,http://127.0.0.1:8083/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: true
+    peer-eureka-nodes-update-interval-ms: 10000

@@ -24,6 +24,7 @@
         <module>study-dubbo</module>
         <module>study-springboot</module>
         <module>study-springboot-starter</module>
+        <module>study-springcloud</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
