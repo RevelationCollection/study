@@ -1,0 +1,16 @@
+#Spring-Cloud
+集群学习
+##study-sc-eureka
+服务发现，注册
+##study-sc-client
+客户端，对外提供的http接口服务
+##study-sc-server
+服务端，真实提供业务处理的服务
+##study-sc-ribbon
+负载均衡
+##study-sc-hystrix
+断路器，熔断器，降级
+##study-sc-hystrix-dashboard
+hystrix可视化项目
+##study-sc-feign
+声明式接口，整合ribbon+hystrix

@@ -16,6 +16,7 @@
 		<module>study-sc-ribbon</module>
 		<module>study-sc-hystrix</module>
 		<module>study-sc-hystrix-dashboard</module>
+		<module>study-sc-feign</module>
 	</modules>
 
 	<artifactId>study-springcloud</artifactId>

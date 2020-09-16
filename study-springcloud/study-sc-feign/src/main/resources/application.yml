@@ -1,0 +1,35 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: feign-client-server
+  profiles:
+    active: feign-hystrix #开启feign熔断器处理
+
+logging:
+  level:
+    org.springframework.cloud: debug
+    com.netflix: debug
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+
+
+---
+spring:
+  profiles: feign-hystrix
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100

@@ -4,8 +4,8 @@ spring:
 
 logging:
   level:
-    org.springframework.cloud: debug
-    com.netflix: debug
+    org.springframework.cloud: info
+    com.netflix: info
 ---
 spring:
   application:
