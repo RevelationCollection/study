@@ -1,0 +1,73 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+
+############zuul config
+zuul:
+  host:
+    #http连接超时时间
+    connect-timeout-millis: 2000
+    #socket超时时间
+    socket-timeout-millis: 1000
+    #http最大连接数
+    max-total-connections: 200
+    #每个地址的最大连接数
+    max-per-route-connections: 20
+  #信号量模式
+  ribbon-isolation-strategy: semaphore
+  semaphore:
+    #最大信号量
+    max-semaphores: 100
+  #路由信息
+  routes:
+    route1:
+      path: /static/**
+      url: http://127.0.0.1:8088
+    rote2:
+      path: /dynamic/**
+      serviceId: helloserver
+    rote3:
+      path: /random/**
+      serviceId: helloserver
+      #转发的时候是否替换匹配搭配的路径。默认true
+      stripPrefix: false
+    #定义登录校验路径
+    user-token:
+      path: /token/login
+      serviceId: helloserver
+      stripPrefix: false
+
+token:
+  zuul:
+    token-filter:
+      noAuthenticationRoutes:
+        - user-token
+        - login-token
+  test-custom: test123456
+
+#自定义hysstrix的超时时间
+hystrix:
+  command:
+    myusers-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+#自定义ribbon请求地址
+myusers-service:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: https://example1.com,http://example2.com
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100

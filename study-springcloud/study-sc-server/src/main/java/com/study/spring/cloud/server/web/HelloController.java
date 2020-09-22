@@ -45,4 +45,8 @@ public class HelloController {
         logger.info("path:{} ,body:{}",path,body);
         return "success port:" + serverPort;
     }
+    @RequestMapping("/**")
+    public String testAll(){
+        return "path error port:" + serverPort;
+    }
 }

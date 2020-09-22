@@ -1,0 +1,15 @@
+server:
+  port: 8007
+
+spring:
+  application:
+    name: stream-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #确认消息发送到交换机，选择确认类型交互
+    #publisher-confirms: true
+    publisher-confirm-type: correlated
+

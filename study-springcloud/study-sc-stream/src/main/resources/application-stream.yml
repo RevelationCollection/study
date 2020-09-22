@@ -1,0 +1,49 @@
+server:
+  port: 8007
+
+logging:
+  level: warn
+  org.springframework: INFO
+  org.springframework.cloud: INFO
+  org.springframework.integration: INFO
+
+spring:
+  application:
+    name: stream-server
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #确认消息发送到交换机，选择确认类型交互
+    #publisher-confirms: true
+    publisher-confirm-type: correlated
+  #stream配置
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          #会在META-INF/spring.bingders文件找对应的配置
+          type: rabbit
+          #针对这个binder定义spring的相关配置
+          enviroment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                publisher-confirm-type: correlated
+      bindings:
+        input:
+          binder: rabbit
+          destination: things1
+          #自定义消息转换格式
+          content-type: application/user
+        output:
+          binder: rabbit
+          destination: things1
+          content-type: application/user
+
+stream:
+  type: yaml

@@ -17,7 +17,10 @@
 		<module>study-sc-hystrix</module>
 		<module>study-sc-hystrix-dashboard</module>
 		<module>study-sc-feign</module>
-	</modules>
+        <module>study-sc-zuul</module>
+        <module>study-sc-stream</module>
+        <module>study-sc-bus</module>
+    </modules>
 
 	<artifactId>study-springcloud</artifactId>
 	<name>study-springcloud</name>

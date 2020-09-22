@@ -14,3 +14,15 @@
 hystrix可视化项目
 ##study-sc-feign
 声明式接口，整合ribbon+hystrix
+##study-sc-zuul
+网关服务start
+##study-sc-stream
+消息驱动
+##study-sc-bus
+分布式消息推送监听
+##study-sc-gateway
+nio-netty网关
+##study-sc-sleuth
+分布式链路追踪
+##study-sc-config
+分布式配置中心
