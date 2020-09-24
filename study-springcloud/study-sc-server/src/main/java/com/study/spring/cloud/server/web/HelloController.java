@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
 @RestController
@@ -46,7 +47,21 @@ public class HelloController {
         return "success port:" + serverPort;
     }
     @RequestMapping("/**")
-    public String testAll(){
-        return "path error port:" + serverPort;
+    public String testAll(HttpServletRequest request){
+        // /archeshein/supplyDemo/selectSupplyDemoEntites 获取uri
+        String requestURI = request.getRequestURI();
+        // /archeshein 获取项目名称
+        String contextPath = request.getContextPath();
+        // http 获取协议
+        String scheme = request.getScheme();
+        // localhost 获取ip
+        String serverName = request.getServerName();
+        // 9091 获取端口
+        int serverPort = request.getServerPort();
+        // http://localhost:9091/archeshein/supplyDemo/selectSupplyDemoEntites 获取全路径url
+        StringBuffer requestURL = request.getRequestURL();
+        // /supplyDemo/test 获取资源路径
+        String servletPath = request.getServletPath();
+        return "path error port:" + serverPort+",url:"+requestURL;
     }
 }

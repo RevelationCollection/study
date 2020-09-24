@@ -1,0 +1,28 @@
+test:
+  #指定ip
+  local: http://127.0.0.1:8088
+  #从注册中心获取
+  center: lb://HELLOSERVER
+
+spring:
+  jmx:
+    enabled: false
+  cloud:
+    gateway:
+      routes:
+        #http://127.0.0.1:9999/local/random --> http://127.0.0.1:8088/local/random
+        - id: local_route
+          uri: ${test.local}
+          predicates:
+            - Path=/local/{path}
+        #http://127.0.0.1:9999/center/random --> http://172.28.13.7:8088/center/random
+        - id: center_route
+          uri: ${test.center}
+          predicates:
+            - Path=/center/{path}
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/

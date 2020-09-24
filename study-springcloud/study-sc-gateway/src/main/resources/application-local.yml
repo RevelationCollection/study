@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        #映射后路径：https://example.org/red/aaa
+        - id: path_route
+          uri: https://example.org
+          predicates:
+            - Path=/red/{path}
+        #映射后路径：http://127.0.0.1:8088/getCar
+        - id: test_route
+          #只能是域名或者ip端口，后面跟随路径无效
+          uri: http://127.0.0.1:8088/random
+          predicates:
+            - Path=/getCar
+        #映射后路径：http://127.0.0.1:8088/**
+        - id: test_strip_route
+          uri: http://127.0.0.1:8088
+          predicates:
+            - Path=/random/**
+          filters:
+            - StripPrefix=1
+        #映射后路径：http://127.0.0.1:8088
+        - id: strip_route
+          uri: http://127.0.0.1:8088
+          predicates:
+            - Path=/test/**
+          filters:
+            #截取命中的path数量，如果path:/test/ads ,StripPrefix=2,则截取后为空直接访问uri
+            - StripPrefix=2
+        #映射后路径：http://127.0.0.1:8088/mypath/prefixpath_route
+        - id: prefixpath_route
+          uri: http://127.0.0.1:8088/random
+          predicates:
+            - Path=/prefixpath_route
+          filters:
+            - PrefixPath=/mypath
+eureka:
+  client:
+    enabled: false

@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+#请求服务器：http://网关地址/serviceId/具体的地址url   serviceId区分大小写，http://127.0.0.1:9999/HELLOSERVER/random
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
