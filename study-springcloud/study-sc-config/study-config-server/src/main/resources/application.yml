@@ -1,0 +1,53 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: config-server
+  profiles:
+#    active: local
+    active: security
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka/
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      server:
+        git:
+          uri: /Users/wy/IdeaProjects/study/study-springcloud/study-sc-config/study-config-server/src/main/resources/configs
+
+---
+spring:
+  profiles: git
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/RevelationCollection/simple
+          searchPaths: config-server/src/test
+          username:
+          password:
+
+---
+spring:
+  profiles: security
+  cloud:
+    config:
+      server:
+        git:
+          uri: /Users/wy/IdeaProjects/study/study-springcloud/study-sc-config/study-config-server/src/main/resources/configs
+  security:
+    user:
+      name: user
+      password: 12346

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: test-value
+#默认远程config-server的值无法覆盖
+custom:
+  value: test-value
+
+
+private:
+  custom:
+    value: private-value

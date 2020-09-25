@@ -21,7 +21,8 @@
         <module>study-sc-stream</module>
         <module>study-sc-bus</module>
         <module>study-sc-gateway</module>
-    </modules>
+		<module>study-sc-config</module>
+	</modules>
 
 	<artifactId>study-springcloud</artifactId>
 	<name>study-springcloud</name>

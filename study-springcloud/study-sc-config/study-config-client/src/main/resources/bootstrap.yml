@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: helloserver
+      uri: http://127.0.0.1:9001/
+  profiles:
+    active: dev
