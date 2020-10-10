@@ -1,0 +1,32 @@
+spring:
+  application:
+    name:
+  profiles: region
+
+server:
+  port: 8081
+
+
+eureka:
+  instance:
+    hostname: region
+    instance-id: region
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    #地区选择
+    region:  hangzhou
+    availability-zones:
+      hangzhou: zone-1,zone-2
+    #固定好地区后开始调用服务
+    service-url:
+      zone-1: http://127.0.0.1:8081/eureka/
+      zone-2: http://127.0.0.1:8082/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: true
+    peer-eureka-nodes-update-interval-ms: 10000
+
+zone:
+#  name: zone-1
+  name: zone-2

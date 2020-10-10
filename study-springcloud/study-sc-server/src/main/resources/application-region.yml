@@ -1,0 +1,26 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: helloserver
+  profiles: region
+eureka:
+  instance:
+    instance-id:  ${spring.application.name}:${server.port}
+    metadata-map:
+      #指定自己的区域
+      zone: zone-1
+  client:
+    healthcheck:
+      enabled: true
+    #指定区域
+    region: hangzhou
+    availability-zones:
+      hangzhou: zone-1,zone-2
+    service-url:
+      zone-1: http://127.0.0.1:8081/eureka/
+      zone-2: http://127.0.0.1:8081/eureka/
+
+zone:
+  name: zone1
