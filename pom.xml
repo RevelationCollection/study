@@ -25,6 +25,8 @@
         <module>study-springboot</module>
         <module>study-springboot-starter</module>
         <module>study-springcloud</module>
+        <module>study-springalibaba</module>
+        <module>study-mybatis</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

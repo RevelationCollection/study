@@ -146,7 +146,7 @@ public class Pro_2 {
         return rootNode;
     }
 
-    class ListNode {
+    private class ListNode {
         int val;
         ListNode next;
         ListNode(int x) { val = x; }

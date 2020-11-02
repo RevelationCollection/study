@@ -18,6 +18,7 @@ public class ASortMain {
         //4、希尔排序
         System.out.println(Arrays.toString(ShellSort.shellSort(arr)));
         //5、归并排序
+        arr = new int[]{-7, 51, 3, 121, -3, 32, 21, 43, 4, 25, 56, 77, 16, 25, 87, 56, -11, 68, 99, 70};
         System.out.println(Arrays.toString(MergeSort.mergeSort(arr)));
         //6、快速排序
         System.out.println("快速排序，单指针随机基准排序："+Arrays.toString(QuickSort.quickSort(arr)));

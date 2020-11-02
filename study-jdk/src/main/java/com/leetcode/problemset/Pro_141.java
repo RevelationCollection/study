@@ -86,7 +86,7 @@ public class Pro_141 {
         root.next = node;
     }
 
-    class ListNode {
+    private class ListNode {
       int val;
       ListNode next;
       ListNode(int x) {

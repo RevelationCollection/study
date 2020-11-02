@@ -18,7 +18,6 @@ public class Pro_6 {
         int gaps = numRows + numRows-2;
         int len = s.length();
         int columns = len/gaps;
-        int surplus = len%gaps;
         //循环列数
         for (int row = 0; row < numRows; row++) {
             //循环行数

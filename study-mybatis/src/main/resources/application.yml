@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: mybatis_plus
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.10.111.13:3306/dispatcher?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username:  dispatcher_rw
+    password:  haoshikisses
+
+mybatis-plus:
+  global-config:
+    db-config:
+      #全局逻辑删除标识，查询的时候也会附带该值
+      logic-delete-value: 1
+      logic-not-delete-value: 0
