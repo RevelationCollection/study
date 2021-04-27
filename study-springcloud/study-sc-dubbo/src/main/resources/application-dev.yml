@@ -1,0 +1,163 @@
+logging:
+  config: classpath:logback-dev.xml
+spring:
+  application:
+    name: deposit-service-dev
+  datasource:
+    url: jdbc:mysql://172.23.0.64:3306/aden?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: aden
+    password: haoshikisses
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    druid:
+      max-active: 20
+      filters: stat
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+
+  #spring redis连接
+  redis:
+    timeout: 60000
+    password: uXL9GgkkdHS4ZaeMh4NV
+    database: 14
+    sentinel:
+      master: mymaster
+      nodes: 172.23.0.59:56379,172.23.0.61:56380,172.23.0.62:56381
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 30000
+        max-idle: 5
+        min-idle: 1
+  #rabbitmq
+  rabbitmq:
+    addresses: 172.23.0.59:5672,172.23.0.61:5672,172.23.0.62:5672
+    #port: 5672
+    username: aden
+    password: aden
+    virtual-host: /
+    #开启发送失败返回
+    publisher-confirms: true #  消息发送到交换机确认机制,是否确认回调
+    publisher-returns: true  #  消息发送到交换机确认机制,是否返回回馈
+    template:
+      mandatory: true
+    listener:
+      simple:
+        #指定最小的消费者数量
+        concurrency: 2
+        #指定最大的消费者数量.
+        max-concurrency: 10
+        #开启ack
+        acknowledge-mode: auto
+        # 设置失败重试策略
+        retry:
+          enabled: true #是否开启消费者重试（为false时关闭消费者重试，这时消费端代码异常会一直重复收到消息）
+          max-attempts: 200 #最大重试次数
+          initial-interval: 5000 #重试间隔时间（单位毫秒）
+          max-interval: 180000 #重试最大时间间隔（单位毫秒）
+          multiplier: 2 #应用于前一重试间隔的乘法器。
+      #开启ack
+      direct:
+        acknowledge-mode: auto
+#eureka注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #client发送心跳给server端的频率
+    lease-renewal-interval-in-seconds: 5
+    #心跳超时移除时间
+    lease-expiration-duration-in-seconds: 15
+  client:
+    serviceUrl:
+      defaultZone: http://172.23.11.236:8761/eureka/
+    #每隔一定时间在server获取一次服务列表，默认30秒
+    registry-fetch-interval-seconds: 10
+
+#dubbo 配置
+dubbo:
+  registry:
+    address: zookeeper://172.23.0.59:2181?backup=172.23.0.61:2181,172.23.0.62:2181
+  protocol:
+    port: 28901
+    name: dubbo
+  application:
+    name: ${spring.application.name}
+  consumer:
+    check: false
+    timeout: 10000
+    retries: 0
+    filter: tracing
+  provider:
+    timeout: 10000
+    retries: 0
+    filter: tracing
+
+
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+# feign 配置
+feign:
+  hystrix:
+    enabled: true
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms
+#文件服务器地址配置
+minio:
+  url: http://172.23.0.61:9000
+  accessKey: adentest
+  secretKey: Adentest123
+  bocket: fund
+  active: test
+#放行的白名单路径
+white-list:
+  url:
+    - /account/getUserAccount
+    - /account/findHasSameName
+    - /swagger-resources/**
+    - /fund/file/bank/img
+    - /fund/file/bank/*
+    - /account/findMaxId
+    - /doc.html/**
+    - /webjars/**
+    - /favicon.ico
+    - /error
+    - /

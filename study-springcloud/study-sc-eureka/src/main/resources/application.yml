@@ -29,6 +29,9 @@ eureka:
     wait-time-in-ms-when-sync-empty: 0
     enable-self-preservation: true
     peer-eureka-nodes-update-interval-ms: 10000
+    #读缓存刷新
+    response-cache-auto-expiration-in-seconds: 10
+    response-cache-update-interval-ms: 3000
 
 ---
 spring:

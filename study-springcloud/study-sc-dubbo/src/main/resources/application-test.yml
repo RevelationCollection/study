@@ -1,0 +1,123 @@
+logging:
+  config: classpath:logback-prod.xml
+spring:
+  servlet:
+    multipart:
+      max-file-size: 15MB
+  datasource:
+    url: jdbc:mysql://10.12.7.51:3306/aden?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: aden_rw
+    password: j8p14Y6kd9
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    druid:
+      max-active: 20
+      filters: stat
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+  #spring redis连接
+  redis:
+    timeout: 60000
+    password: m68cxxjQlP
+    database: 6
+    sentinel:
+      master: adenmaster
+      nodes: 10.12.7.53:6378,10.12.7.54:6378,10.12.7.55:6378
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 30000
+        max-idle: 5
+        min-idle: 1
+
+#eureka注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+  client:
+    serviceUrl:
+      defaultZone: http://10.12.0.17:8761/eureka/,http://10.12.0.24:8761/eureka/
+    #每隔一定时间在server获取一次服务列表，默认30秒
+    registry-fetch-interval-seconds: 10
+
+#dubbo 配置
+dubbo:
+  registry:
+    address: zookeeper://10.12.0.26:2181?backup=10.12.0.27:2181,10.12.0.28:2181
+  protocol:
+    port: 28901
+    name: dubbo
+  application:
+    name: ${spring.application.name}
+  consumer:
+    check: false
+    timeout: 10000
+    retries: 0
+
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+# feign 配置
+feign:
+  hystrix:
+    enabled: true
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms
+
+#文件服务器地址配置
+minio:
+  url: http://10.12.0.200
+  accessKey: aden
+  secretKey: Et68Mw9Ta6
+  bocket: fund
+  active: prod
+
+#放行的白名单路径
+white-list:
+  url:
+    - /account/getUserAccount
+    - /account/findHasSameName
+    - /fund/file/bank/img
+    - /favicon.ico
+    - /error
+    - /

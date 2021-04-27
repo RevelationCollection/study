@@ -34,7 +34,7 @@ public class Pro_117 {
         return root;
     }
 
-    class Node {
+    private class Node {
         public int val;
         public Node left;
         public Node right;

@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  #    active: dev
+  jackson:
+    time-zone: Asia/Shanghai
+  application:
+    name: deposit-service
+
+server:
+  port: 8901

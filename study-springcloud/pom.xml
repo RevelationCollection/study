@@ -22,7 +22,9 @@
         <module>study-sc-bus</module>
         <module>study-sc-gateway</module>
 		<module>study-sc-config</module>
-	</modules>
+        <module>study-sc-dubbo</module>
+        <module>study-sc-oauth</module>
+    </modules>
 
 	<artifactId>study-springcloud</artifactId>
 	<name>study-springcloud</name>

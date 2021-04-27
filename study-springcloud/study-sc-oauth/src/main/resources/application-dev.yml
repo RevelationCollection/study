@@ -1,0 +1,83 @@
+spring:
+#mysql data
+  datasource:
+    url: jdbc:mysql://172.23.0.64:3306/basic_sms?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: basic_sms_rw
+    password: F4teD9332777
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+    druid:
+      max-active: 20
+      filters: stat
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+#redis
+  redis:
+    timeout: 60000
+    password: uXL9GgkkdHS4ZaeMh4NV
+    database: 14
+    sentinel:
+      master: mymaster
+      nodes: 172.23.0.59:56379,172.23.0.61:56380,172.23.0.62:56381
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 30000
+        max-idle: 5
+        min-idle: 1
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: aden-cust-info
+          uri: lb://aden-cust-info
+          predicates:
+            - Path=/cust-info/**
+        # 客户服务
+        - id: aden-cust-core
+          uri: lb://aden-cust-core
+          predicates:
+            - Path=/cust-core/**
+
+security:
+  oauth2:
+    client:
+      registration:
+        google:
+          client-id: google-client-id
+          client-secret: google-client-secret
+
+#eureka注册中心配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 15
+  client:
+    serviceUrl:
+      defaultZone: http://172.23.11.236:8761/eureka/
+    #每隔一定时间在server获取一次服务列表，默认30秒
+    registry-fetch-interval-seconds: 10
+
+
+rsa:
+  publicKey:
+    305C300D06092A864886F70D0101010500034B003048024100A614D23641AE5BADC42E9DA1D41C8B4FC1B908A178B6308AE615AD9FBE915CD20B87F9FBA0F02F7FF168414D41B5FD1356669E4F8EADC6AE30C9A23005D6F1790203010001
+  privateKey:
+    30820156020100300D06092A864886F70D0101010500048201403082013C020100024100A614D23641AE5BADC42E9DA1D41C8B4FC1B908A178B6308AE615AD9FBE915CD20B87F9FBA0F02F7FF168414D41B5FD1356669E4F8EADC6AE30C9A23005D6F1790203010001024100A0D0BA780503730C80516F1B7B0B24AE56F3F7727B33572FB7F937C4DDBF5DB309695E43DA54CC9E52F39EB8091E09419AE44AC379AF223C5F62A69FAEAADBB1022100DCDD3F664E7658661D6BBCA7910F02A73DCFE2102F3A620B8A10F7D5D5C43975022100C080867F84FD025CB1ED3D01CC1BA9BEE747C90C76F89C8DD4294F41C5B113750220096B5A27D7D2CE44549EE2A5D6D6E80B0FE4CCC459EF487D2B7F3BC29FE2457D022100B63DF716EA740CB46CCDC81FD777A8EFCE4D2B8CDD64E7F16D95DE2ECA55A5B1022100C088AF868F9953D95C70BF7C525674B7F6FA44581342FE42CAFFC58BC8AE1C79

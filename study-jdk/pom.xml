@@ -10,6 +10,51 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>study-jdk</artifactId>
+    <properties>
+        <jmh.version>1.23</jmh.version>
+    </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <!-- JMH benchmark generator, based on annotation processors. -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!-- 生成jar测试 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>jmh-demo</finalName>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
